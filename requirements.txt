@@ -1,0 +1,2 @@
+pytest
+buildkite-test-collector

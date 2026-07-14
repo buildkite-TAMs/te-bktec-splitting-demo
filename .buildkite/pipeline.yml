@@ -1,0 +1,25 @@
+# bktec test-splitting demo.
+# One step with parallelism: 4 — bktec fetches a per-node test plan from Test
+# Engine and runs a different slice of the suite on each of the 4 jobs, balanced
+# by historical timing. Compare total wall-clock vs running all tests on one node.
+steps:
+  - label: ":test_engine: pytest split by bktec"
+    key: "bktec-split"
+    parallelism: 4
+    command: "./.buildkite/steps/run-bktec.sh"
+    env:
+      BUILDKITE_TEST_ENGINE_SUITE_SLUG: "bktec-splitting-demo"
+      BUILDKITE_TEST_ENGINE_TEST_RUNNER: "pytest"
+      BUILDKITE_TEST_ENGINE_RESULT_PATH: "tmp/result.json"
+      BUILDKITE_TEST_ENGINE_UPLOAD_RESULTS: "true"
+    secrets:
+      - BKTEC_API_TOKEN
+    plugins:
+      - docker#v5.13.0:
+          image: "python:3.12"
+          # Pass the CI env (incl. BUILDKITE_PARALLEL_JOB*) + the token into the container.
+          propagate-environment: true
+          environment:
+            - "BKTEC_API_TOKEN"
+    agents:
+      queue: "aws"
