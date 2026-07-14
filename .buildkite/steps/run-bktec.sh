@@ -17,9 +17,10 @@ apt-get update -qq && apt-get install -y -qq bktec >/dev/null
 pip install --quiet -r requirements.txt
 
 # bktec auth: this demo uses a scoped Buildkite API access token (stored as the
-# cluster secret BKTEC_API_TOKEN). In production, prefer keyless OIDC — bktec
-# v2.6.0+ generates a temporary token automatically, no static secret needed.
-export BUILDKITE_TEST_ENGINE_API_ACCESS_TOKEN="${BKTEC_API_TOKEN:-}"
+# cluster secret TEC_API_TOKEN — secret keys can't start with BUILDKITE/BK, so
+# not "BKTEC"). In production, prefer keyless OIDC — bktec v2.6.0+ generates a
+# temporary token automatically, no static secret needed.
+export BUILDKITE_TEST_ENGINE_API_ACCESS_TOKEN="${TEC_API_TOKEN:-}"
 
 echo "--- :test_engine: Running node ${BUILDKITE_PARALLEL_JOB:-0} of ${BUILDKITE_PARALLEL_JOB_COUNT:-1} via bktec"
 bktec run

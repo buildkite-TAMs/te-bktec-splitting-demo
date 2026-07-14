@@ -13,13 +13,13 @@ steps:
       BUILDKITE_TEST_ENGINE_RESULT_PATH: "tmp/result.json"
       BUILDKITE_TEST_ENGINE_UPLOAD_RESULTS: "true"
     secrets:
-      - BKTEC_API_TOKEN
+      - TEC_API_TOKEN
     plugins:
       - docker#v5.13.0:
           image: "python:3.12"
           # Pass the CI env (incl. BUILDKITE_PARALLEL_JOB*) + the token into the container.
           propagate-environment: true
           environment:
-            - "BKTEC_API_TOKEN"
+            - "TEC_API_TOKEN"
     agents:
       queue: "aws"

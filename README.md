@@ -50,14 +50,14 @@ Test Engine → **New suite** → name `bktec-splitting-demo`, framework **pytes
 
 bktec authenticates to the Test Engine API. This demo uses a **Buildkite API
 access token** with scopes `read_suites`, `read_test_plan`, `write_test_plan`,
-stored as the cluster secret **`BKTEC_API_TOKEN`** and exported to
+stored as the cluster secret **`TEC_API_TOKEN`** and exported to
 `BUILDKITE_TEST_ENGINE_API_ACCESS_TOKEN` inside the step.
 
 ```bash
 curl -H "Authorization: Bearer $TOKEN" \
   -X POST "https://api.buildkite.com/v2/organizations/tam-sandbox/clusters/<CLUSTER_ID>/secrets" \
   -H "Content-Type: application/json" \
-  -d '{"key":"BKTEC_API_TOKEN","value":"<bktec access token>","policy":"- pipeline_slug: te-bktec-splitting-demo"}'
+  -d '{"key":"TEC_API_TOKEN","value":"<bktec access token>","policy":"- pipeline_slug: te-bktec-splitting-demo"}'
 ```
 
 > 💡 **Production-preferred: keyless OIDC.** `bktec` v2.6.0+ auto-generates a
