@@ -21,6 +21,11 @@ pip install --quiet -r requirements.txt
 # not "BKTEC"). In production, prefer keyless OIDC — bktec v2.6.0+ generates a
 # temporary token automatically, no static secret needed.
 export BUILDKITE_TEST_ENGINE_API_ACCESS_TOKEN="${TEC_API_TOKEN:-}"
+# Also give bktec the suite's analytics token so it can UPLOAD results directly.
+# Without this, bktec tries to mint one via OIDC (buildkite-agent), which isn't
+# available inside this container. (In production, run bktec on a native agent
+# and OIDC handles both tokens keylessly.)
+export BUILDKITE_ANALYTICS_TOKEN="${SPLIT_ANALYTICS_TOKEN:-}"
 
 echo "--- :test_engine: Running node ${BUILDKITE_PARALLEL_JOB:-0} of ${BUILDKITE_PARALLEL_JOB_COUNT:-1} via bktec"
 bktec run

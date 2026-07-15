@@ -14,12 +14,14 @@ steps:
       BUILDKITE_TEST_ENGINE_UPLOAD_RESULTS: "true"
     secrets:
       - TEC_API_TOKEN
+      - SPLIT_ANALYTICS_TOKEN
     plugins:
       - docker#v5.13.0:
           image: "python:3.12"
-          # Pass the CI env (incl. BUILDKITE_PARALLEL_JOB*) + the token into the container.
+          # Pass the CI env (incl. BUILDKITE_PARALLEL_JOB*) + the tokens into the container.
           propagate-environment: true
           environment:
             - "TEC_API_TOKEN"
+            - "SPLIT_ANALYTICS_TOKEN"
     agents:
       queue: "aws"
