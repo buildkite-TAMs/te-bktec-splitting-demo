@@ -28,4 +28,7 @@ export BUILDKITE_TEST_ENGINE_API_ACCESS_TOKEN="${TEC_API_TOKEN:-}"
 export BUILDKITE_ANALYTICS_TOKEN="${SPLIT_ANALYTICS_TOKEN:-}"
 
 echo "--- :test_engine: Running node ${BUILDKITE_PARALLEL_JOB:-0} of ${BUILDKITE_PARALLEL_JOB_COUNT:-1} via bktec"
+# bktec points the collector at BUILDKITE_TEST_ENGINE_RESULT_PATH (tmp/result.json);
+# the collector won't create the parent dir, so make it first.
+mkdir -p tmp
 bktec run
