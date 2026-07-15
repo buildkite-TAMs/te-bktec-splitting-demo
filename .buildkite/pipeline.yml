@@ -6,7 +6,7 @@ steps:
   - label: ":test_engine: pytest split by bktec"
     key: "bktec-split"
     parallelism: 4
-    command: "./.buildkite/steps/run-bktec.sh"
+    command: "bash .buildkite/steps/run-bktec.sh"
     env:
       BUILDKITE_TEST_ENGINE_SUITE_SLUG: "bktec-splitting-demo"
       BUILDKITE_TEST_ENGINE_TEST_RUNNER: "pytest"
