@@ -23,5 +23,6 @@ steps:
           environment:
             - "TEC_API_TOKEN"
             - "SPLIT_ANALYTICS_TOKEN"
+            - "RUN_FLAKY_LAB"
     agents:
       queue: "aws"
